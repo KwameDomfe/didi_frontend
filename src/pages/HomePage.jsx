@@ -1,3 +1,9 @@
+// Utility to join API base and endpoint without double slashes
+function joinApiUrl(base, path) {
+    if (!base) return path;
+    if (!path) return base;
+    return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
+}
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -292,7 +298,7 @@ const HomePage = () => {
     const loadMenuCategories = async () => {
         try {
             const allCategories = [];
-            let nextUrl = `${API_BASE_URL}/categories/`;
+            let nextUrl = joinApiUrl(API_BASE_URL, 'categories/');
 
             while (nextUrl) {
                 const response = await axios.get(nextUrl);
@@ -321,7 +327,7 @@ const HomePage = () => {
     
         setLoading(true);
         try {
-            const restaurantsResponse = await axios.get(`${API_BASE_URL}/restaurants/`);
+            const restaurantsResponse = await axios.get(joinApiUrl(API_BASE_URL, 'restaurants/'));
             const restaurantsData = restaurantsResponse.data.results || restaurantsResponse.data;
             setRestaurants(restaurantsData);
             setError(null);
@@ -340,7 +346,7 @@ const HomePage = () => {
         }
     
         try {
-            const menuResponse = await axios.get(`${API_BASE_URL}/menu-items/`);
+            const menuResponse = await axios.get(joinApiUrl(API_BASE_URL, 'menu-items/'));
             const menuData = menuResponse.data.results || menuResponse.data;
             setMenuItems(menuData);
         } catch (menuError) {
@@ -351,7 +357,7 @@ const HomePage = () => {
     // Load popular cuisines from backend
     const loadPopularCuisines = async () => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/restaurants/popular-cuisines/`);
+            const response = await axios.get(joinApiUrl(API_BASE_URL, 'restaurants/popular-cuisines/'));
             setPopularCuisines(normalizeArray(response.data));
         } catch (err) {
             setPopularCuisines([]);
