@@ -8,7 +8,7 @@ import MenuCategories from '../components/homePage/MenuCategories';
 import MenuCategoriesSkeleton from '../components/homePage/MenuCategoriesSkeleton';
 import { loadMyConnectionsCount, loadSocialDiningState } from '../utils/socialDiningData';
 import AsideUser from '../components/homePage/AsideUser';
-import { FaChevronLeft, FaChevronRight, FaStar, FaUtensils, FaExclamationTriangle } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaStar, FaExclamationTriangle } from 'react-icons/fa';
 import { canManageRestaurants } from '../utils/userRoles';
 
 const SIDEBAR_PLACEHOLDERS = [

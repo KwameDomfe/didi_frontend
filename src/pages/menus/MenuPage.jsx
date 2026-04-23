@@ -82,7 +82,7 @@ const MenuPage = () => {
     const [sortBy, setSortBy] = useState('name');
     const [viewMode, setViewMode] = useState('category'); // 'grid' or 'category'
     const [activeCategoryId, setActiveCategoryId] = useState('');
-    const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
+    // const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false); // Removed if unused
     const [rowFadeState, setRowFadeState] = useState({});
     const [ownedRestaurants, setOwnedRestaurants] = useState([]);
     const [addMenuRestaurantId, setAddMenuRestaurantId] = useState('');
@@ -98,23 +98,23 @@ const MenuPage = () => {
     // Ensure restaurant filter is set after both restaurants and menuItems are loaded
     // Set restaurant filter only when both restaurants and menuItems are loaded
     useEffect(
-        () => {
-            if (slug && restaurants && restaurants.length > 0 &&
-                menuItems && menuItems.length > 0) {
-                    const found = restaurants.find(r => r.slug === slug);
-                    if (found) {
-                        setRestaurantFilter(found.name);
-                        setRestaurantName(found.name);
-                    } else {
-                        setRestaurantFilter('');
-                        setRestaurantName('');
-                    }
-                } 
-            else if (!slug) {
-                setRestaurantFilter('');
-                setRestaurantName('');
+      () => {
+        if (slug && restaurants && restaurants.length > 0 &&
+          menuItems && menuItems.length > 0) {
+            const found = restaurants.find(r => r.slug === slug);
+            if (found) {
+              setRestaurantFilter(found.name);
+              setRestaurantName(found.name);
+            } else {
+              setRestaurantFilter('');
+              setRestaurantName('');
             }
-        }, [slug, restaurants, menuItems]
+          } 
+        else if (!slug) {
+          setRestaurantFilter('');
+          setRestaurantName('');
+        }
+      }, [slug, restaurants, menuItems]
     );
 
     // Check for URL parameters on component mount (for legacy support)

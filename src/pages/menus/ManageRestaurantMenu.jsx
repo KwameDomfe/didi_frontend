@@ -6,7 +6,7 @@ import MenuItemCard from './MenuItemCard';
 import MenuItemFormModal from '../../components/MenuItemFormModal';
 import CategoryFormModal from '../../components/CategoryFormModal';
 import DeleteConfirmModal from '../../components/DeleteConfirmModal';
-import { FaTags, FaPlusCircle, FaUtensils, FaFolderOpen, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaTags, FaPlusCircle, FaFolderOpen, FaEdit, FaTrash } from 'react-icons/fa';
 import { canManageRestaurants } from '../../utils/userRoles';
 
 export default function ManageRestaurantMenu() {
