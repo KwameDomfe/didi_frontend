@@ -82,7 +82,7 @@ const MenuPage = () => {
     const [sortBy, setSortBy] = useState('name');
     const [viewMode, setViewMode] = useState('category'); // 'grid' or 'category'
     const [activeCategoryId, setActiveCategoryId] = useState('');
-    const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
+    // const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
     const [rowFadeState, setRowFadeState] = useState({});
     const [ownedRestaurants, setOwnedRestaurants] = useState([]);
     const [addMenuRestaurantId, setAddMenuRestaurantId] = useState('');
@@ -352,7 +352,7 @@ const MenuPage = () => {
     });
 
         setFilteredItems(filtered);
-    }, [menuItems, searchTerm, dietaryFilter, restaurantFilter, mealPeriodFilter, sortBy, itemMealPeriods]
+    }, [menuItems, searchTerm, dietaryFilter, restaurantFilter, mealPeriodFilter, sortBy, itemMealPeriods, resolveItemMealPeriod]
 );
 
   const getCategoryName = (item) => {

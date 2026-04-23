@@ -163,7 +163,7 @@ export default function VendorCategoriesPage() {
     }
 
     const confirmed = window.confirm(
-      `Delete category \"${category.name || 'this category'}\"? This cannot be undone.`
+      `Delete category "${category.name || 'this category'}"? This cannot be undone.`
     );
     if (!confirmed) {
       return;

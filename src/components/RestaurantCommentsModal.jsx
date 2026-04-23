@@ -41,7 +41,7 @@ const CommentAvatar = ({ src, name, size = 32 }) => {
 
 const RestaurantCommentsModal = ({
     isOpen, onClose, restaurant, user,
-    comments, commentsLoading, commentsCount,
+    comments, commentsLoading,
     commentText, setCommentText, commentLoading, handleAddComment,
     showAllComments, setShowAllComments,
     editingCommentId, editingCommentText, setEditingCommentText, editLoading,

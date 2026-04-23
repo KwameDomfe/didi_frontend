@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { FaUserPlus, FaLock, FaEye, FaEyeSlash, FaCheckCircle, FaHome, FaUtensils, FaSignOutAlt, FaSpinner, FaUsers, FaTruck, FaShoppingBag, FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaUserPlus, FaLock, FaEye, FaEyeSlash, FaCheckCircle, FaHome, FaUtensils, FaSignOutAlt, FaSpinner, FaUsers, FaTruck, FaShoppingBag } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useApp } from '../../App';
