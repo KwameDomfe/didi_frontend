@@ -17,7 +17,7 @@ const ConnectionsPage = () => {
   const [plans, setPlans] = useState([]);
   const [connections, setConnections] = useState([]);
   const [requests, setRequests] = useState({ incoming: [], outgoing: [] });
-  // const [socialDataSource, setSocialDataSource] = useState('backend');
+  const [socialDataSource, setSocialDataSource] = useState('backend');
   const [socialLoading, setSocialLoading] = useState(true);
   const [socialError, setSocialError] = useState(null);
 
