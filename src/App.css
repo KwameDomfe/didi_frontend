@@ -1,0 +1,1292 @@
+@media (max-width: 576px) {
+  #mainNavbar .navbar-nav {
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100%;
+  }
+  #mainNavbar .nav-item {
+    margin: 1rem 0 !important;
+  }
+  #mainNavbar .btn {
+    width: 80vw !important;
+    max-width: 320px !important;
+    margin: 2rem auto 0 auto !important;
+    font-size: 1.2rem !important;
+  }
+}
+.App {
+  text-align: center;
+}
+
+.restaurant-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  background: white;
+  padding: 0 !important;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-12px) translateZ(0);
+  -webkit-transform: translateY(-12px) translateZ(0);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.restaurant-card .card-img-top {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.restaurant-card:hover .card-img-top {
+  transform: scale(1.08) translateZ(0);
+  -webkit-transform: scale(1.08) translateZ(0);
+}
+
+.restaurant-image-container {
+  border-radius: 16px 16px 0 0 !important;
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Gradient overlay for restaurant cards */
+.restaurant-gradient-overlay {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 50% !important;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent) !important;
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.7), transparent) !important;
+  pointer-events: none !important;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Floating badges container */
+.restaurant-badges-container {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  display: flex !important;
+  gap: 8px !important;
+  z-index: 10 !important;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  isolation: isolate;
+}
+
+/* Fallback for older Chrome versions without gap support */
+@supports not (gap: 8px) {
+  .restaurant-badges-container {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+  .restaurant-badges-container > * + * {
+    margin-left: 8px !important;
+  }
+}
+
+/* Rating badge */
+.restaurant-rating-badge {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #333 !important;
+  padding: 6px 12px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: 6px !important;
+}
+
+/* Price range badge */
+.restaurant-price-badge {
+  background-color: rgba(34, 197, 94, 0.95) !important;
+  color: white !important;
+  padding: 6px 10px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: 6px !important;
+}
+
+/* Restaurant card info grid */
+.restaurant-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Fallback for browsers without gap support */
+@supports not (gap: 6px) {
+  .restaurant-info-grid > * + * {
+    margin-top: 6px;
+  }
+}
+
+.restaurant-info-item {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.restaurant-info-delivery {
+  color: #22c55e;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.restaurant-card-social-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.restaurant-card-comments {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: #f9fafb;
+}
+
+.restaurant-card-comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.restaurant-card-comment-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.5rem;
+}
+
+/* View menu button */
+.restaurant-view-menu-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  width: 100%;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  .home-aside-scroll {
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+}
+
+.restaurant-view-menu-btn:hover:not(:disabled) {
+  transform: translateY(-2px) translateZ(0);
+  -webkit-transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  color: white;
+}
+
+.restaurant-view-menu-btn:active:not(:disabled) {
+  transform: translateY(0) translateZ(0);
+  -webkit-transform: translateY(0) translateZ(0);
+}
+
+/* Responsive image heights */
+@media (max-width: 768px) {
+  .restaurant-image-container {
+    height: 200px !important;
+    max-height: 200px !important;
+  }
+  
+  .restaurant-card {
+    border-radius: 12px !important;
+  }
+  
+  .restaurant-card:hover {
+    transform: translateY(-8px) translateZ(0);
+    -webkit-transform: translateY(-8px) translateZ(0);
+  }
+}
+
+@media (max-width: 576px) {
+  .restaurant-image-container {
+    height: 180px !important;
+    max-height: 180px !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+  
+  .restaurant-card {
+    border-radius: 12px !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .restaurant-card:hover {
+    transform: translateY(-4px) translateZ(0);
+    -webkit-transform: translateY(-4px) translateZ(0);
+  }
+  
+  /* Smaller badges on mobile */
+  .restaurant-image-container .badge {
+    padding: 4px 8px !important;
+    font-size: 0.75rem !important;
+    gap: 4px !important;
+  }
+  
+  /* Adjust card body padding */
+  .restaurant-card .card-body {
+    padding: 1rem !important;
+  }
+  
+  /* Smaller title on mobile */
+  .restaurant-card .card-title {
+    font-size: 1.1rem !important;
+  }
+  
+  /* Adjust button padding */
+  .restaurant-card .btn {
+    padding: 10px 16px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .restaurant-card-social-actions .btn {
+    flex: 1 1 calc(50% - 0.5rem);
+  }
+}
+
+.search-filter-container {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.menu-horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-scroll-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0.5rem;
+  width: 28px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.menu-scroll-fade-left {
+  left: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.menu-scroll-fade-right {
+  right: 0;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.menu-categories-nav {
+  padding-right: 0.25rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.menu-category-aside {
+  position: sticky;
+  top: 4rem;
+  align-self: start;
+}
+
+.menu-category-aside-inner {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 4rem);
+}
+
+.menu-categories-list {
+  margin-bottom: 0;
+}
+
+.menu-category-section {
+  scroll-margin-top: 4rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.jumbotron {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  border-radius: 15px;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.badge {
+  font-size: 0.875em;
+}
+
+.position-relative .badge {
+  font-size: 0.75rem;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.min-vh-100 {
+  min-height: 100vh !important;
+}
+
+/* Custom animations with browser prefixes */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(20px) translateZ(0);
+    transform: translateY(20px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0) translateZ(0);
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(20px) translateZ(0);
+    transform: translateY(20px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0) translateZ(0);
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.restaurant-card {
+  -webkit-animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.5s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .jumbotron {
+    padding: 2rem 1rem;
+  }
+  
+  .display-4 {
+    font-size: 2rem;
+  }
+  
+  .search-filter-container .row {
+    gap: 1rem 0;
+  }
+  
+  /* Smaller square images on mobile - full width */
+  .restaurant-card .card-img-top,
+  .restaurant-card img,
+  .restaurant-card > div:first-child {
+    width: 100% !important;
+    height: 250px !important;
+    min-height: 250px !important;
+    max-height: 250px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller square images on very small screens - full width */
+  .restaurant-card .card-img-top,
+  .restaurant-card img,
+  .restaurant-card > div:first-child {
+    width: 100% !important;
+    height: 200px !important;
+    min-height: 200px !important;
+    max-height: 200px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Cart button styling */
+.btn-warning {
+  color: #000;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #ffc107;
+  color: #000;
+}
+
+/* Loading spinner */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Menu Item Card Styling */
+.menu-item-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.menu-item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.menu-item-card .card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.menu-item-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Dietary badges */
+.badge.bg-success {
+  background-color: #28a745 !important;
+}
+
+.badge.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+/* Hide number input arrows for cart quantity input */
+.cart-qty-input::-webkit-outer-spin-button,
+.cart-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.cart-qty-input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-to-content:focus {
+  left: 12px;
+  top: 12px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: #000;
+  color: #fff;
+  z-index: 1100;
+  border-radius: 6px;
+}
+
+/* Improve focus visibility */
+:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.75);
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .restaurant-card:hover,
+  .menu-item-card:hover,
+  .restaurant-view-menu-btn:hover:not(:disabled) {
+    transform: none !important;
+  }
+}
+
+/* Empty state visuals */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6c757d;
+}
+.empty-state .empty-icon {
+  font-size: 2.25rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.empty-state .empty-actions .btn + .btn {
+  margin-left: 0.5rem;
+}
+
+/* Subtle invalid state polish */
+.form-control.is-invalid,
+.form-select.is-invalid {
+  box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.15);
+}
+.invalid-feedback {
+  font-size: 0.85rem;
+}
+
+/* Price highlighting */
+.text-success {
+  color: #28a745 !important;
+  font-weight: 600;
+}
+
+/* Search and filter section */
+.input-group-text {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+/* Menu category sections */
+.menu-section {
+  margin-bottom: 2rem;
+}
+
+.menu-section-title {
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+}
+
+/* Spice level indicators */
+.spice-level {
+  font-size: 1.2em;
+}
+
+/* Modal Menu Styles */
+.menu-item-modal-card {
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.menu-item-modal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.modal-dialog-scrollable {
+  max-height: 90vh;
+}
+
+.modal-dialog-scrollable .modal-content {
+  max-height: calc(90vh - 1.75rem);
+}
+
+.modal-dialog-scrollable .modal-body {
+  overflow-y: auto;
+}
+
+/* Modal backdrop animation */
+.modal.show {
+  animation: modalFadeIn 0.3s ease-in-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal menu item images */
+.menu-item-modal-card img {
+  transition: transform 0.3s ease;
+}
+
+.menu-item-modal-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Modal header styling */
+.modal-header {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+}
+
+.modal-header .btn-close {
+  filter: invert(1);
+}
+
+/* Modal Portal Styles */
+#modal-root {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 9999 !important;
+  pointer-events: none;
+}
+
+#modal-root > * {
+  pointer-events: auto;
+}
+
+/* Ensure restaurant cards don't contain modals */
+.restaurant-card {
+  position: relative;
+  overflow: visible !important;
+}
+
+.restaurant-card * {
+  overflow: visible !important;
+}
+
+/* Full-screen Modal Styles */
+.modal-fullscreen {
+  margin: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.modal-fullscreen .modal-content {
+  border: none !important;
+  border-radius: 0 !important;
+  height: 100vh !important;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ensure modal is above everything */
+.modal.show {
+  z-index: 1055 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+.menu-item-fullscreen-card {
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.menu-item-fullscreen-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.menu-item-fullscreen-card .card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.menu-item-fullscreen-card:hover .card-img-top {
+  transform: scale(1.03);
+}
+
+/* Full-screen modal animations */
+.modal.show {
+  animation: fullscreenFadeIn 0.3s ease-in-out !important;
+}
+
+@keyframes fullscreenFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Modal backdrop improvements */
+.modal {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Enhanced close button visibility */
+.modal-header .btn-close {
+  filter: invert(1);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.modal-header .btn-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Enhanced badge styling for full-screen */
+.badge.fs-6 {
+  font-size: 0.9rem !important;
+}
+
+/* Better spacing for full-screen layout */
+.modal-fullscreen .modal-body {
+  padding: 2rem 1rem;
+}
+
+.modal-fullscreen .modal-footer {
+  padding: 1.5rem 1rem;
+}
+
+/* Enhanced mobile navigation */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    background-color: rgba(33, 37, 41, 0.95);
+    border-radius: 0.5rem;
+    min-height: 90vh;
+    margin-top: 0.5rem;
+    padding: 1rem;
+  }
+}
+
+/* Toast notification positioning */
+.toast {
+  min-width: 300px;
+}
+
+/* Cart item styling */
+.cart-item {
+  transition: all 0.3s ease;
+  border: 1px solid #dee2e6;
+}
+
+.cart-item:hover {
+  border-color: #007bff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Enhanced loading skeletons */
+.placeholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Enhanced error states */
+.alert-danger {
+  border-left: 4px solid #dc3545;
+}
+
+/* Better button hover effects */
+.btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Enhanced card hover for better feedback */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Sticky sidebar for cart */
+@media (min-width: 992px) {
+  .sticky-top {
+    top: 2rem !important;
+  }
+}
+
+/* Floating cart button */
+.floating-cart-btn {
+  transition: all 0.3s ease;
+  border: none !important;
+}
+
+.floating-cart-btn:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.floating-cart-btn:active {
+  transform: scale(0.95);
+}
+
+/* Enhanced accessibility for screen readers */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Improved focus indicators */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #007bff;
+}
+
+/* Enhanced loading state */
+.btn.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.btn.loading::after {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Cart badge animation */
+@keyframes cartBounce {
+  0% { 
+    transform: scale(1) translate(-50%, -50%);
+  }
+  25% { 
+    transform: scale(1.3) translate(-50%, -50%);
+  }
+  50% { 
+    transform: scale(1.1) translate(-50%, -50%);
+  }
+  75% { 
+    transform: scale(1.2) translate(-50%, -50%);
+  }
+  100% { 
+    transform: scale(1) translate(-50%, -50%);
+  }
+}
+
+.cart-badge-animation {
+  animation: cartBounce 0.6s ease-out;
+}
+
+/* Add to cart button enhanced animations */
+@keyframes addToCartSuccess {
+  0% { 
+    transform: scale(1);
+    background-color: var(--bs-primary);
+  }
+  50% { 
+    transform: scale(0.95);
+    background-color: var(--bs-success);
+  }
+  100% { 
+    transform: scale(1);
+    background-color: var(--bs-success);
+  }
+}
+
+.btn.adding-to-cart {
+  animation: addToCartSuccess 0.3s ease-out;
+}
+
+/* Enhanced menu item card hover effects */
+.menu-item-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Analytics metric tiles */
+.analytics-metric-card {
+  text-decoration: none;
+  color: inherit;
+  min-height: 6.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.analytics-metric-card:hover {
+  color: inherit;
+  opacity: 1;
+  font-weight: inherit;
+  border-color: rgba(13, 110, 253, 0.25);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.analytics-metric-card:focus-visible {
+  outline: 2px solid rgba(13, 110, 253, 0.5);
+  outline-offset: 2px;
+}
+
+/* Toast notification animations */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Enhanced toast styling */
+.toast {
+  border: none !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+  border-radius: 12px !important;
+}
+
+.toast-header {
+  border-radius: 12px 12px 0 0 !important;
+  border-bottom: none !important;
+}
+
+.toast-body {
+  border-radius: 0 0 12px 12px !important;
+}
+
+/* Cart preview styling */
+.max-height-150 {
+  max-height: 150px;
+}
+
+/* Cart progress indicator */
+.cart-progress-indicator {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Meal Periods Section */
+.meal-periods-section {
+  margin: 2rem 0;
+}
+
+/* Popular Cuisines Section */
+.popular-cuisines-section {
+  margin: 2rem 0;
+}
+
+.cuisines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.cuisine-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cuisine-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.cuisine-emoji {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.cuisine-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.cuisine-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.cuisine-count {
+  color: #007bff;
+  font-weight: 500;
+}
+
+.cuisine-rating {
+  color: #ffc107;
+  font-weight: 500;
+}
+
+.meal-period-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.meal-period-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.meal-period-header h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.meal-period-items {
+  margin-top: 1rem;
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.meal-item-card {
+  min-width: 220px;
+  max-width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.meal-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.meal-item-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.meal-item-details {
+  padding: 0.75rem;
+}
+
+.meal-item-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meal-item-restaurant {
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.meal-item-price {
+  font-weight: 700;
+  color: #007bff;
+  font-size: 1rem;
+}
+
+/* Password reveal button styling */
+.password-reveal-btn {
+  border-left: none !important;
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+  transition: all 0.2s ease;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+}
+
+.password-reveal-btn:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+  transform: scale(1.1);
+}
+
+.password-reveal-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #80bdff;
+  background-color: #e9ecef;
+}
+
+.password-reveal-btn:active {
+  background-color: #dee2e6;
+  border-color: #6c757d;
+  transform: scale(0.95);
+}
+
+/* Input group password styling */
+.input-group > .form-control:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+.input-group > .btn:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group:focus-within .password-reveal-btn {
+  border-color: #80bdff;
+}
+
+/* Authentication form enhancements */
+.auth-card {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.auth-form-container {
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

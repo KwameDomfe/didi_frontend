@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Functionality Test - The Restaurant</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .content {
+            padding: 30px;
+        }
+        .test-section {
+            margin: 25px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+            color: #212529;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+        .btn-warning:hover {
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+        }
+        .test-results {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-running { background-color: #ffc107; }
+        .status-success { background-color: #28a745; }
+        .status-error { background-color: #dc3545; }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #28a745;
+        }
+        .app-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .api-status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .api-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .api-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .api-loading { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="header">
+            <h1>🍽️ Modal Functionality Test Suite</h1>
+            <p>Comprehensive testing for The Restaurant platform modal system</p>
+            <div>
+                <span class="status-indicator" id="backend-status"></span>
+                <span>Backend Status</span>
+                <span class="status-indicator" id="frontend-status" style="margin-left: 20px;"></span>
+                <span>Frontend Status</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="test-section">
+                <h3>🚀 Quick Access</h3>
+                <p>Navigate directly to the application pages to test modal functionality:</p>
+                <div class="app-links">
+                    <a href="http://localhost:3000" target="_blank" class="btn btn-success">🏠 Home Page</a>
+                    <a href="http://localhost:3000/restaurants" target="_blank" class="btn btn-success">🏪 Restaurants</a>
+                    <a href="http://localhost:3000/menu" target="_blank" class="btn btn-success">📋 Menu Page</a>
+                    <a href="http://localhost:3000/cart" target="_blank" class="btn btn-success">🛒 Cart Page</a>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>🧪 Automated Tests</h3>
+                <p>Run comprehensive modal functionality tests:</p>
+                <button onclick="runAutomatedTests()" class="btn">🔬 Run All Tests</button>
+                <button onclick="checkAPIStatus()" class="btn btn-warning">📡 Check API Status</button>
+                <button onclick="testModalComponents()" class="btn">🔧 Test Modal Components</button>
+                
+                <div id="test-output" class="test-results" style="display: none;">
+                    <div id="test-content"></div>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>📋 Manual Testing Checklist</h3>
+                <p>Follow this comprehensive checklist to verify all modal functionality:</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🎯 Core Functionality</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="test1"> Navigate to restaurants page</li>
+                            <li><input type="checkbox" id="test2"> Click "View Menu 🍽️" button</li>
+                            <li><input type="checkbox" id="test3"> Modal opens in full-screen</li>
+                            <li><input type="checkbox" id="test4"> Dark backdrop appears</li>
+                            <li><input type="checkbox" id="test5"> Restaurant name in header</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🔘 Close Functionality</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="test6"> Close button (X) works</li>
+                            <li><input type="checkbox" id="test7"> ESC key closes modal</li>
+                            <li><input type="checkbox" id="test8"> Backdrop click closes modal</li>
+                            <li><input type="checkbox" id="test9"> Modal closes smoothly</li>
+                            <li><input type="checkbox" id="test10"> No modal stuck states</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📱 Content & Layout</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="test11"> Menu items display in grid</li>
+                            <li><input type="checkbox" id="test12"> Images load correctly</li>
+                            <li><input type="checkbox" id="test13"> Prices are visible</li>
+                            <li><input type="checkbox" id="test14"> Descriptions are readable</li>
+                            <li><input type="checkbox" id="test15"> Dietary badges show</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🛒 Interactive Elements</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="test16"> "Add to Cart" buttons work</li>
+                            <li><input type="checkbox" id="test17"> Cart updates properly</li>
+                            <li><input type="checkbox" id="test18"> Loading states appear</li>
+                            <li><input type="checkbox" id="test19"> Error handling works</li>
+                            <li><input type="checkbox" id="test20"> Toast notifications show</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📱 Responsive Design</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="test21"> Works on mobile</li>
+                            <li><input type="checkbox" id="test22"> Works on tablet</li>
+                            <li><input type="checkbox" id="test23"> Scrolling works properly</li>
+                            <li><input type="checkbox" id="test24"> Touch interactions work</li>
+                            <li><input type="checkbox" id="test25"> No layout overflow</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>⚡ Performance & UX</h4>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="test26"> Modal opens quickly</li>
+                            <li><input type="checkbox" id="test27"> Smooth animations</li>
+                            <li><input type="checkbox" id="test28"> No lag or freezing</li>
+                            <li><input type="checkbox" id="test29"> Keyboard navigation</li>
+                            <li><input type="checkbox" id="test30"> Accessibility features</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <button onclick="calculateProgress()" class="btn btn-success">📊 Calculate Progress</button>
+                    <div id="progress-result" style="margin-top: 10px;"></div>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>📡 API Status Monitor</h3>
+                <div id="api-status">
+                    <div class="api-loading">Checking API status...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-check API status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAPIStatus();
+        });
+
+        async function checkAPIStatus() {
+            const statusDiv = document.getElementById('api-status');
+            const backendStatus = document.getElementById('backend-status');
+            const frontendStatus = document.getElementById('frontend-status');
+            
+            statusDiv.innerHTML = '<div class="api-loading">🔄 Checking API endpoints...</div>';
+            
+            try {
+                // Check Django backend
+                const restaurantsResponse = await fetch('http://localhost:8000/api/restaurants/restaurants/');
+                const menuResponse = await fetch('http://localhost:8000/api/restaurants/menu-items/');
+                
+                const backendOk = restaurantsResponse.ok && menuResponse.ok;
+                
+                // Check React frontend
+                const frontendResponse = await fetch('http://localhost:3000/');
+                const frontendOk = frontendResponse.ok;
+                
+                // Update status indicators
+                backendStatus.className = `status-indicator ${backendOk ? 'status-success' : 'status-error'}`;
+                frontendStatus.className = `status-indicator ${frontendOk ? 'status-success' : 'status-error'}`;
+                
+                let statusHtml = '';
+                
+                if (backendOk) {
+                    const restaurantsData = await restaurantsResponse.json();
+                    const menuData = await menuResponse.json();
+                    
+                    statusHtml += `
+                        <div class="api-success">
+                            ✅ <strong>Backend API (Django)</strong>: Running on port 8000<br>
+                            📊 Restaurants: ${restaurantsData.results?.length || restaurantsData.length || 0} found<br>
+                            📊 Menu Items: ${menuData.results?.length || menuData.length || 0} found
+                        </div>
+                    `;
+                } else {
+                    statusHtml += '<div class="api-error">❌ <strong>Backend API</strong>: Not accessible on port 8000</div>';
+                }
+                
+                if (frontendOk) {
+                    statusHtml += '<div class="api-success">✅ <strong>Frontend (React)</strong>: Running on port 3000</div>';
+                } else {
+                    statusHtml += '<div class="api-error">❌ <strong>Frontend</strong>: Not accessible on port 3000</div>';
+                }
+                
+                if (backendOk && frontendOk) {
+                    statusHtml += '<div class="api-success">🎉 <strong>System Status</strong>: All services are running! Modal testing can proceed.</div>';
+                }
+                
+                statusDiv.innerHTML = statusHtml;
+                
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="api-error">❌ <strong>Connection Error</strong>: ${error.message}</div>`;
+                backendStatus.className = 'status-indicator status-error';
+                frontendStatus.className = 'status-indicator status-error';
+            }
+        }
+
+        function runAutomatedTests() {
+            const outputDiv = document.getElementById('test-output');
+            const contentDiv = document.getElementById('test-content');
+            
+            outputDiv.style.display = 'block';
+            contentDiv.innerHTML = '<div style="color: #ffc107;">🔄 Running automated tests...</div>';
+            
+            // Open restaurants page in new tab for testing
+            const testWindow = window.open('http://localhost:3000/restaurants', '_blank');
+            
+            setTimeout(() => {
+                if (testWindow) {
+                    // Inject test script
+                    const script = testWindow.document.createElement('script');
+                    script.textContent = `
+                        console.log('🧪 Modal Test Execution Started');
+                        
+                        setTimeout(() => {
+                            // Test modal components
+                            const restaurants = document.querySelectorAll('.restaurant-card');
+                            const menuButtons = Array.from(document.querySelectorAll('button')).filter(btn => 
+                                btn.textContent.includes('View Menu')
+                            );
+                            
+                            console.log('✅ Restaurant cards found:', restaurants.length);
+                            console.log('✅ View Menu buttons found:', menuButtons.length);
+                            
+                            if (menuButtons.length > 0) {
+                                console.log('🎯 Modal functionality is ready for testing');
+                                console.log('👆 Click any "View Menu" button to test modal display');
+                            }
+                            
+                            // Test CSS classes
+                            const modalStyles = Array.from(document.styleSheets)
+                                .flatMap(sheet => {
+                                    try {
+                                        return Array.from(sheet.cssRules || []);
+                                    } catch (e) {
+                                        return [];
+                                    }
+                                })
+                                .filter(rule => rule.selectorText && rule.selectorText.includes('modal'));
+                            
+                            console.log('✅ Modal CSS rules found:', modalStyles.length);
+                            
+                        }, 1000);
+                    `;
+                    testWindow.document.head.appendChild(script);
+                    
+                    contentDiv.innerHTML = `
+                        <div style="color: #28a745;">✅ Tests launched in new tab</div>
+                        <div>📝 Check browser console in the new tab for results</div>
+                        <div>🎯 Manually test modal functionality by clicking "View Menu" buttons</div>
+                    `;
+                } else {
+                    contentDiv.innerHTML = '<div style="color: #dc3545;">❌ Could not open test window. Please check if popup blocker is disabled.</div>';
+                }
+            }, 1000);
+        }
+
+        function testModalComponents() {
+            const outputDiv = document.getElementById('test-output');
+            const contentDiv = document.getElementById('test-content');
+            
+            outputDiv.style.display = 'block';
+            contentDiv.innerHTML = `
+                <div style="color: #667eea; font-weight: bold;">🔧 Modal Component Analysis</div>
+                <br>
+                <div><strong>Expected Modal Structure:</strong></div>
+                <div>├── .modal (Full-screen overlay with backdrop)</div>
+                <div>├── .modal-dialog.modal-fullscreen (Dialog container)</div>
+                <div>├── .modal-content (Main content area)</div>
+                <div>│   ├── .modal-header (Restaurant info & close button)</div>
+                <div>│   ├── .modal-body (Menu items grid)</div>
+                <div>│   └── .modal-footer (Additional actions)</div>
+                <div><br></div>
+                <div><strong>Key Features to Verify:</strong></div>
+                <div>• Full-screen modal (100vw x 100vh)</div>
+                <div>• Dark backdrop (rgba(0,0,0,0.9))</div>
+                <div>• High z-index (1050)</div>
+                <div>• ESC key handling</div>
+                <div>• Backdrop click handling</div>
+                <div>• Smooth animations</div>
+                <div>• Responsive grid layout</div>
+                <div>• Add to cart functionality</div>
+                <div><br></div>
+                <div style="color: #28a745;"><strong>👆 Navigate to http://localhost:3000/restaurants to test</strong></div>
+            `;
+        }
+
+        function calculateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+            const percentage = ((checked.length / checkboxes.length) * 100).toFixed(1);
+            
+            const resultDiv = document.getElementById('progress-result');
+            resultDiv.innerHTML = `
+                <div style="font-size: 1.2em; font-weight: bold; color: #667eea;">
+                    📊 Testing Progress: ${checked.length}/${checkboxes.length} (${percentage}%)
+                </div>
+                <div style="margin-top: 10px;">
+                    ${percentage >= 90 ? '🎉 Excellent! Modal functionality is thoroughly tested.' :
+                      percentage >= 70 ? '👍 Good progress! Continue testing remaining features.' :
+                      percentage >= 50 ? '⚠️ Halfway there. More testing needed.' :
+                      '🔄 Just getting started. Continue with the checklist.'}
+                </div>
+            `;
+        }
+
+        // Auto-save progress
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'checkbox') {
+                localStorage.setItem('modalTestProgress', JSON.stringify(
+                    Array.from(document.querySelectorAll('input[type="checkbox"]')).map(cb => cb.checked)
+                ));
+            }
+        });
+
+        // Load saved progress
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('modalTestProgress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach((cb, i) => {
+                    if (progress[i]) cb.checked = true;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

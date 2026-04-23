@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Functionality Test - The Restaurant</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-success {
+            background-color: #28a745;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .checklist li:before {
+            content: "☐ ";
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="header">
+            <h1>🍽️ Modal Functionality Test</h1>
+            <p>Comprehensive testing for The Restaurant platform modal system</p>
+        </div>
+
+        <div class="test-section">
+            <h3>🔧 Automated Tests</h3>
+            <p>Click the button below to run automated checks:</p>
+            <button onclick="runAutomatedTests()" class="btn">Run Automated Tests</button>
+            <div id="test-results" style="margin-top: 15px;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📱 Navigate to Application</h3>
+            <p>Open the application to perform manual testing:</p>
+            <a href="http://localhost:3000" target="_blank" class="btn btn-success">Open Home Page</a>
+            <a href="http://localhost:3000/restaurants" target="_blank" class="btn btn-success">Open Restaurants Page</a>
+            <a href="http://localhost:3000/menu" target="_blank" class="btn btn-success">Open Menu Page</a>
+        </div>
+
+        <div class="test-section">
+            <h3>✅ Manual Testing Checklist</h3>
+            <p>Follow this checklist to verify modal functionality:</p>
+            <ul class="checklist">
+                <li>Navigate to the restaurants page</li>
+                <li>Verify restaurant cards are displayed</li>
+                <li>Click any "View Menu 🍽️" button</li>
+                <li>Full-screen modal opens with smooth animation</li>
+                <li>Modal has dark background overlay</li>
+                <li>Restaurant name appears in modal header</li>
+                <li>Menu items display in responsive grid layout</li>
+                <li>Each menu item shows: image, name, description, price</li>
+                <li>Dietary badges are visible (Vegetarian, Vegan, etc.)</li>
+                <li>"Add to Cart" buttons are clickable</li>
+                <li>Close button (X) in top-right corner works</li>
+                <li>Pressing ESC key closes the modal</li>
+                <li>Clicking outside modal (on backdrop) closes it</li>
+                <li>Modal content scrolls if it exceeds screen height</li>
+                <li>"View Full Menu Page" button works</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>🎯 Key Features to Verify</h3>
+            <ul>
+                <li><strong>Full-Screen Design:</strong> Modal should occupy the entire viewport</li>
+                <li><strong>Responsive Layout:</strong> Menu items adapt to different screen sizes</li>
+                <li><strong>Smooth Animations:</strong> Modal opens/closes with fade effect</li>
+                <li><strong>Accessibility:</strong> Keyboard navigation and screen reader support</li>
+                <li><strong>Touch Support:</strong> Works properly on mobile devices</li>
+                <li><strong>Cart Integration:</strong> Adding items updates cart count</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>🐛 Common Issues to Check</h3>
+            <div class="code-block">
+Issues to look for:
+• Modal doesn't open when clicking "View Menu"
+• Modal appears but is constrained to card size
+• Close buttons don't work
+• Menu items don't display
+• Images fail to load
+• Responsive layout breaks on mobile
+• Modal gets stuck open
+• Backdrop click doesn't close modal
+• ESC key doesn't work
+• Scroll issues in modal body
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 Expected API Data</h3>
+            <p>Verify these API endpoints are working:</p>
+            <ul>
+                <li><code>GET /api/restaurants/restaurants/</code> - Restaurant list</li>
+                <li><code>GET /api/restaurants/menu-items/</code> - Menu items</li>
+            </ul>
+            <button onclick="checkAPIs()" class="btn btn-warning">Check API Status</button>
+            <div id="api-results" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <script>
+        async function runAutomatedTests() {
+            const resultsDiv = document.getElementById('test-results');
+            resultsDiv.innerHTML = '<p>🔄 Running tests... (This will open the app in a new tab)</p>';
+            
+            // Open the app in a new tab and run tests
+            const appWindow = window.open('http://localhost:3000/restaurants', '_blank');
+            
+            // Wait a bit for the app to load, then inject our test script
+            setTimeout(() => {
+                if (appWindow) {
+                    // Create a script element in the new window
+                    const script = appWindow.document.createElement('script');
+                    script.textContent = `
+                        ${document.querySelector('script[src="/modal-test.js"]')?.textContent || '// Test script not loaded'}
+                        
+                        // Additional inline tests
+                        setTimeout(() => {
+                            console.log('Modal Test Results:');
+                            const restaurants = document.querySelectorAll('.restaurant-card');
+                            console.log('Restaurants found:', restaurants.length);
+                            
+                            const menuButtons = document.querySelectorAll('button');
+                            const viewMenuButtons = Array.from(menuButtons).filter(btn => 
+                                btn.textContent.includes('View Menu')
+                            );
+                            console.log('View Menu buttons found:', viewMenuButtons.length);
+                            
+                            if (viewMenuButtons.length > 0) {
+                                console.log('✅ Modal functionality appears ready for testing');
+                            } else {
+                                console.log('❌ No View Menu buttons found');
+                            }
+                        }, 1000);
+                    `;
+                    appWindow.document.head.appendChild(script);
+                    
+                    resultsDiv.innerHTML = '<p>✅ Tests initiated in new tab. Check browser console for results.</p>';
+                } else {
+                    resultsDiv.innerHTML = '<p>❌ Could not open app window. Please manually navigate to the app.</p>';
+                }
+            }, 2000);
+        }
+
+        async function checkAPIs() {
+            const resultsDiv = document.getElementById('api-results');
+            resultsDiv.innerHTML = '<p>🔄 Checking APIs...</p>';
+            
+            try {
+                // Check restaurants API
+                const restaurantsResponse = await fetch('http://localhost:8000/api/restaurants/restaurants/');
+                const restaurantsOk = restaurantsResponse.ok;
+                
+                // Check menu items API  
+                const menuResponse = await fetch('http://localhost:8000/api/restaurants/menu-items/');
+                const menuOk = menuResponse.ok;
+                
+                let resultHtml = '<h4>API Status:</h4>';
+                resultHtml += `<p>🏪 Restaurants API: ${restaurantsOk ? '✅ Working' : '❌ Failed'}</p>`;
+                resultHtml += `<p>🍽️ Menu Items API: ${menuOk ? '✅ Working' : '❌ Failed'}</p>`;
+                
+                if (restaurantsOk && menuOk) {
+                    const restaurantsData = await restaurantsResponse.json();
+                    const menuData = await menuResponse.json();
+                    
+                    resultHtml += `<p>📊 Found ${restaurantsData.results?.length || restaurantsData.length || 0} restaurants</p>`;
+                    resultHtml += `<p>📊 Found ${menuData.results?.length || menuData.length || 0} menu items</p>`;
+                }
+                
+                resultsDiv.innerHTML = resultHtml;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `<p>❌ API Error: ${error.message}</p><p>Make sure the Django backend is running on port 8000.</p>`;
+            }
+        }
+
+        // Auto-check APIs on page load
+        window.addEventListener('load', () => {
+            setTimeout(checkAPIs, 1000);
+        });
+    </script>
+</body>
+</html>

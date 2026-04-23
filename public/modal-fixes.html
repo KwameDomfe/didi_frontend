@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Behavior - Fixed</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            padding: 30px;
+        }
+        .fix-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.warning { background: #fff3cd; color: #856404; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .fix-list {
+            list-style: none;
+            padding: 0;
+        }
+        .fix-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fix-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .fix-icon.done { background: #28a745; color: white; }
+        .fix-icon.pending { background: #ffc107; color: #212529; }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Modal Behavior Fixed!</h1>
+            <p>Comprehensive improvements to modal functionality</p>
+        </div>
+
+        <div class="content">
+            <div class="fix-section">
+                <h3>✅ Applied Fixes</h3>
+                <p>The following issues have been identified and resolved:</p>
+                
+                <ul class="fix-list">
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Event Propagation Issues</strong>
+                        <div>- Added preventDefault() and stopPropagation() to modal handlers</div>
+                    </li>
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Double-Click Prevention</strong>
+                        <div>- Added isOpening state to prevent multiple modal triggers</div>
+                    </li>
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Body Scroll Lock</strong>
+                        <div>- Prevents background scrolling when modal is open</div>
+                    </li>
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Enhanced ESC Key Handling</strong>
+                        <div>- Modern event.key handling with proper cleanup</div>
+                    </li>
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Z-Index Priority</strong>
+                        <div>- Increased to 1055 to ensure modal appears above all content</div>
+                    </li>
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Backdrop Improvements</strong>
+                        <div>- Added blur effect and better click detection</div>
+                    </li>
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Accessibility Enhancements</strong>
+                        <div>- Added ARIA attributes for screen readers</div>
+                    </li>
+                    <li>
+                        <div class="fix-icon done">✓</div>
+                        <strong>Button State Management</strong>
+                        <div>- Clear visual feedback during modal operations</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fix-section">
+                <h3>🔧 Technical Improvements</h3>
+                
+                <h4>1. Event Handling</h4>
+                <div class="code-block">
+// Before: Basic event handling
+onClick={openMenuModal}
+
+// After: Robust event handling
+onClick={(e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  openMenuModal(e);
+}}
+                </div>
+
+                <h4>2. State Management</h4>
+                <div class="code-block">
+// Added protection against double-clicks
+const [isOpening, setIsOpening] = useState(false);
+
+// Prevent multiple modal instances
+if (showModal || isOpening) {
+  return; // Ignore additional requests
+}
+                </div>
+
+                <h4>3. Body Scroll Management</h4>
+                <div class="code-block">
+// Lock body scroll when modal opens
+document.body.style.overflow = 'hidden';
+document.body.classList.add('modal-open');
+
+// Restore on close
+document.body.style.overflow = '';
+document.body.classList.remove('modal-open');
+                </div>
+            </div>
+
+            <div class="fix-section">
+                <h3>🧪 Test the Fixed Modal</h3>
+                <p>Navigate to the restaurants page to test the improved modal behavior:</p>
+                
+                <a href="http://localhost:3000/restaurants" target="_blank" class="btn">
+                    🏪 Test Restaurants Page
+                </a>
+                <a href="http://localhost:3000/menu" target="_blank" class="btn">
+                    📋 Test Menu Page
+                </a>
+
+                <div class="status success" style="margin-top: 20px;">
+                    <strong>Expected Behavior:</strong><br>
+                    • Modal opens smoothly without lag<br>
+                    • Only one modal can be open at a time<br>
+                    • Background is locked from scrolling<br>
+                    • ESC key closes modal reliably<br>
+                    • Clicking backdrop closes modal<br>
+                    • Close button works consistently<br>
+                    • Button states provide clear feedback
+                </div>
+            </div>
+
+            <div class="fix-section">
+                <h3>🐛 Common Issues Resolved</h3>
+                
+                <div class="status error">
+                    <strong>❌ Before:</strong> Modal opening multiple times, scroll issues, event conflicts
+                </div>
+                
+                <div class="status success">
+                    <strong>✅ After:</strong> Clean modal behavior with proper state management
+                </div>
+
+                <h4>Specific Problems Fixed:</h4>
+                <ul>
+                    <li><strong>Multiple Modals:</strong> Added state guards to prevent multiple instances</li>
+                    <li><strong>Scroll Bleed:</strong> Body scroll lock prevents background scrolling</li>
+                    <li><strong>ESC Key Issues:</strong> Improved keyboard event handling</li>
+                    <li><strong>Event Bubbling:</strong> Proper event propagation control</li>
+                    <li><strong>Z-Index Conflicts:</strong> Higher priority ensures modal visibility</li>
+                    <li><strong>Button States:</strong> Clear feedback during modal operations</li>
+                    <li><strong>Memory Leaks:</strong> Proper cleanup of event listeners</li>
+                </ul>
+            </div>
+
+            <div class="fix-section">
+                <h3>📊 Performance Improvements</h3>
+                <ul>
+                    <li>✅ Faster modal opening with optimized state updates</li>
+                    <li>✅ Reduced memory footprint with proper cleanup</li>
+                    <li>✅ Smooth animations with GPU acceleration</li>
+                    <li>✅ Better perceived performance with loading states</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-check if the application is accessible
+        function checkAppStatus() {
+            fetch('http://localhost:3000/restaurants')
+                .then(response => {
+                    if (response.ok) {
+                        document.querySelector('.header').innerHTML += 
+                            '<div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 5px;">✅ Application is running and ready for testing</div>';
+                    }
+                })
+                .catch(error => {
+                    document.querySelector('.header').innerHTML += 
+                        '<div style="margin-top: 10px; padding: 10px; background: rgba(255,0,0,0.2); border-radius: 5px;">❌ Application may not be running on localhost:3000</div>';
+                });
+        }
+
+        window.addEventListener('load', checkAppStatus);
+    </script>
+</body>
+</html>
