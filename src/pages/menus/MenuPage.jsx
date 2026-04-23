@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { useApp } from '../../App.js';
 import MenuItemCard from './MenuItemCard.jsx';
@@ -82,7 +82,7 @@ const MenuPage = () => {
     const [sortBy, setSortBy] = useState('name');
     const [viewMode, setViewMode] = useState('category'); // 'grid' or 'category'
     const [activeCategoryId, setActiveCategoryId] = useState('');
-    const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
+    // Removed unused mobileCategoriesOpen state
     const [rowFadeState, setRowFadeState] = useState({});
     const [ownedRestaurants, setOwnedRestaurants] = useState([]);
     const [addMenuRestaurantId, setAddMenuRestaurantId] = useState('');
@@ -274,18 +274,16 @@ const MenuPage = () => {
       return normalized;
     };
 
-    const resolveItemMealPeriod = (item) => {
+    const resolveItemMealPeriod = useCallback((item) => {
       const fromItem = normalizeMealPeriod(item.meal_period || item.category?.meal_period);
       if (fromItem) {
         return fromItem;
       }
-
       if (item?.id != null) {
         return normalizeMealPeriod(itemMealPeriods[item.id]);
       }
-
       return '';
-    };
+    }, [itemMealPeriods]);
 
     useEffect(() => {
         if (!menuItems || menuItems.length === 0) {
@@ -451,7 +449,7 @@ const MenuPage = () => {
   const handleCategoryLinkClick = (categoryId) => (event) => {
     event.preventDefault();
     setActiveCategoryId(categoryId);
-    setMobileCategoriesOpen(false);
+    // setMobileCategoriesOpen(false); // removed, state not defined
     window.history.replaceState(null, '', `#${categoryId}`);
     scrollToCategorySection(categoryId);
   };
@@ -678,11 +676,11 @@ const MenuPage = () => {
       </div>
     );
 
-    useEffect(() => {
-      if (viewMode !== 'category') {
-        setMobileCategoriesOpen(false);
-      }
-    }, [viewMode]);
+    // useEffect(() => {
+    //   if (viewMode !== 'category') {
+    //     setMobileCategoriesOpen(false);
+    //   }
+    // }, [viewMode]);
     if (isDataLoading) {
       return (
         <div className="container90 mt1-00">
@@ -1159,44 +1157,7 @@ const MenuPage = () => {
         {/* ── Main content ── */}
         <div className="gc1s12 gc4s9-m min-w-0">
           {/* Mobile categories toggle (category view only) */}
-          {/* {viewMode === 'category' && (
-            <div className="d-md-none mb-3 w-100 tl">
-              <button
-                type="button"
-                className="b--none flex items-center gap-2 bg-transparent"
-                onClick={() => setMobileCategoriesOpen((open) => !open)}
-                aria-expanded={mobileCategoriesOpen}
-                aria-controls="mobile-categories-nav"
-              >
-                <span aria-hidden="true">
-                  {mobileCategoriesOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-                </span>
-              </button>
-              {mobileCategoriesOpen && (
-                <nav id="mobile-categories-nav" className="mt-2 border rounded w-100 bg-white p-3">
-                  <p className="fw-semibold mb-2">Categories</p>
-                  <ul className="list-unstyled mb-0 w-100">
-                    {sortedCategoryGroups.map(group => {
-                      const categoryId = categoryAnchorId(group.name);
-                      return (
-                        <li key={`mobile-${group.name}`} className="mb-2">
-                          <a
-                            href={`#${categoryId}`}
-                            className={`flex justify-between ${activeCategoryId === categoryId ? 'b brown0' : 'silver'}`}
-                            onClick={handleCategoryLinkClick(categoryId)}
-                            aria-current={activeCategoryId === categoryId ? 'true' : undefined}
-                          >
-                            <span>{group.name}</span>
-                            <span className="ba w2-00 h2-00 flex items-center justify-center br0-25">{group.items.length}</span>
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-              )}
-            </div>
-          )} */}
+          {/* Mobile categories toggle removed: unused state and handler */}
 
           {/* Section header */}
           <div className="shadow-4 mb2-00">

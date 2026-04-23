@@ -8,34 +8,6 @@ import axios from 'axios';
 import { FaEdit, FaTrash, FaHeart, FaRegHeart, FaShareAlt, FaCommentDots } from 'react-icons/fa';
 import MenuItemCommentsModal from '../../components/MenuItemCommentsModal';
 
-const CommentAvatar = ({ src, name }) => {
-    const [failed, setFailed] = React.useState(false);
-    const initial = (name || 'U').charAt(0).toUpperCase();
-
-    if (src && !failed) {
-        return (
-            <img
-                src={src}
-                alt={`${name} profile`}
-                style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
-                onError={() => setFailed(true)}
-            />
-        );
-    }
-    return (
-        <div
-            style={{
-                width: '28px', height: '28px', borderRadius: '50%',
-                background: '#e9ecef', color: '#495057', fontWeight: 700,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0, fontSize: '0.8rem'
-            }}
-            aria-label={`${name} profile`}
-        >
-            {initial}
-        </div>
-    );
-};
 
 // Enhanced Menu Item Card Component
 const MenuItemCard = ({ item, onUpdate }) => {
@@ -254,34 +226,6 @@ const MenuItemCard = ({ item, onUpdate }) => {
         }
     };
 
-    const handleDeleteComment = async (commentId) => {
-        if (!user || !commentId || String(commentId).startsWith('temp-')) return;
-
-        const previousComments = comments;
-        setComments((prev) => prev.filter((c) => c.id !== commentId));
-        setCommentsCount((prev) => Math.max(0, prev - 1));
-
-        const headers = getAuthHeaders();
-        const endpoints = [
-            `${API_BASE_URL}/menu-items/${menuItemKey}/comments/${commentId}/`,
-            `${API_BASE_URL}/menu-item-comments/${commentId}/`,
-        ];
-        for (const url of endpoints) {
-            try {
-                await axios.delete(url, { headers });
-                return;
-            } catch (e) {
-                const status = e?.response?.status;
-                if (status && status !== 404 && status !== 405) {
-                    setComments(previousComments);
-                    setCommentsCount((prev) => prev + 1);
-                    console.error('[DeleteComment] Failed:', e?.response?.status, e?.response?.data ?? e.message);
-                    showToast(e?.response?.data?.detail || 'Could not delete comment.', 'error');
-                    return;
-                }
-            }
-        }
-    };
 
     const handleStartEditComment = (commentId, currentText) => {
         setEditingCommentId(commentId);
