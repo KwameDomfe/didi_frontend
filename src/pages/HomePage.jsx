@@ -1,9 +1,4 @@
-// Utility to join API base and endpoint without double slashes
-function joinApiUrl(base, path) {
-    if (!base) return path;
-    if (!path) return base;
-    return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
-}
+
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -14,6 +9,13 @@ import { loadMyConnectionsCount, loadSocialDiningState } from '../utils/socialDi
 import AsideUser from '../components/homePage/AsideUser';
 import { FaChevronLeft, FaChevronRight, FaStar, FaExclamationTriangle, FaUtensils } from 'react-icons/fa';
 import { canManageRestaurants } from '../utils/userRoles';
+
+// Utility to join API base and endpoint without double slashes
+function joinApiUrl(base, path) {
+    if (!base) return path;
+    if (!path) return base;
+    return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
+}
 
 const SIDEBAR_PLACEHOLDERS = [
     'You may also like',
