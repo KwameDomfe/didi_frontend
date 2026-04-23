@@ -12,14 +12,14 @@ import {
 } from '../../utils/socialDiningData';
 
 const ConnectionsPage = () => {
-  const { user, showToast, API_BASE_URL } = useApp();
+	const { user, showToast, API_BASE_URL } = useApp();
 
-  const [plans, setPlans] = useState([]);
-  const [connections, setConnections] = useState([]);
-  const [requests, setRequests] = useState({ incoming: [], outgoing: [] });
-  // Removed unused socialDataSource state
-  const [socialLoading, setSocialLoading] = useState(true);
-  const [socialError, setSocialError] = useState(null);
+	const [plans, setPlans] = useState([]);
+	const [connections, setConnections] = useState([]);
+	const [requests, setRequests] = useState({ incoming: [], outgoing: [] });
+	// const [socialDataSource, setSocialDataSource] = useState('none');
+	const [socialLoading, setSocialLoading] = useState(true);
+	const [socialError, setSocialError] = useState(null);
 
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
@@ -40,13 +40,13 @@ const ConnectionsPage = () => {
         setPlans([]);
         setConnections([]);
         setRequests({ incoming: [], outgoing: [] });
-        setSocialDataSource('none');
+        // setSocialDataSource('none');
         return;
       }
       setPlans(state.plans);
       setConnections(state.connections);
       setRequests(state.requests || { incoming: [], outgoing: [] });
-      setSocialDataSource(state.source);
+      // setSocialDataSource(state.source);
     } catch (err) {
       const message =
         err?.response?.status === 401 || err?.response?.status === 403
@@ -56,7 +56,7 @@ const ConnectionsPage = () => {
       setPlans([]);
       setConnections([]);
       setRequests({ incoming: [], outgoing: [] });
-      setSocialDataSource('none');
+      // setSocialDataSource('none');
     } finally {
       setSocialLoading(false);
     }
